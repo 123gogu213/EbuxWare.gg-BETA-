@@ -2506,7 +2506,7 @@ do
 end;
 
 return {
-      windowClass 	= windowClass;
-      boardClass  	= boardClass;
-	targethudClass 	= targethudClass;
-}, 5;
+	windowClass = windowClass;
+	boardClass = boardClass;
+	targethudClass = targethudClass;
+};
