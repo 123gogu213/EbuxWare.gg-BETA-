@@ -242,20 +242,7 @@ do
         end)
     end
     do
-        local Circle = Drawing.new("Circle") do
-            Circle.Color = Color3.fromRGB(255, 255, 255)
-            Circle.Thickness = 1
-            Circle.Transparency = 1
-            Circle.Radius = 100
-            Circle.Visible = false
-
-            RunService.RenderStepped:Connect(function()
-                Circle.Position = UserInputService:GetMouseLocation()
-                if menu.values[2].advanced["mouse offset"].enabled.Toggle then
-                    Circle.Position = Circle.Position + Vector2.new(menu.values[2].advanced["mouse offset"]["x offset"].Slider, menu.values[2].advanced["mouse offset"]["y offset"].Slider)
-                end
-            end)
-        end
+        -- Circle crosshair removed
 
         local aimbot = tabs[2].new_section("aimbot")
 
@@ -275,10 +262,8 @@ do
         targeting.element("Slider", "max distance", {default = {min = 250, max = 15000, default = 15000}})
 
         local fov = aimbot.new_sector("fov", "Right")
-        fov.element("Slider", "fov size", {default = {min = 30, max = 600, default = 100}}, function(State) Circle.Radius = State.Slider end)
-        fov.element("Toggle", "draw fov", nil, function(State) Circle.Visible = State.Toggle end):add_color({Color = Color3.fromRGB(84, 101, 255)}, nil, function(State) Circle.Color = State.Color end)
-        fov.element("Slider", "sides", {default = {min = 15, max = 100, default = 100}}, function(State) Circle.NumSides = State.Slider end)
-        fov.element("Slider", "thickness", {default = {min = 1, max = 4, default = 1}}, function(State) Circle.Thickness = State.Slider end)
+        fov.element("Slider", "fov size", {default = {min = 30, max = 600, default = 100}})
+        -- FOV visual drawing removed (crosshair)
 
         local triggerbot = aimbot.new_sector("triggerbot")
         triggerbot.element("Toggle", "enabled"):add_keybind()
