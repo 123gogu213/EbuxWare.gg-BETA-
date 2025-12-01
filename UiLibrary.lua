@@ -35,6 +35,27 @@ end
 local function GetBodypart()
 end
 
+-- Hook Drawing API to disable crosshair circles from UI library
+local OriginalDrawingNew = Drawing.new
+local CrosshairCircles = {}
+Drawing.new = function(Type, ...)
+    local drawing = OriginalDrawingNew(Type, ...)
+    if Type == "Circle" then
+        -- Store reference and keep it invisible
+        table.insert(CrosshairCircles, drawing)
+        drawing.Visible = false
+        -- Continuously keep it invisible (in case library tries to show it)
+        task.spawn(function()
+            while drawing do
+                if drawing.Visible then
+                    drawing.Visible = false
+                end
+                task.wait(0.1)
+            end
+        end)
+    end
+    return drawing
+end
 
 local menu
 do
